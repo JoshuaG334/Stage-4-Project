@@ -22,12 +22,25 @@ That I have set up for testing software steps as part of my 4th Year project
 const char* ssid = "DESKTOP-LPIC61A";
 const char* password = "12345678";
 
+// This is a single, hard-coded URL for the later http request. We might split it into parts.
 const char* firebaseURL = "https://firestore.googleapis.com/v1/projects/smart-hurley-test/databases/(default)/documents/test_data?key=AIzaSyDp1ep5j_90oInc9v2YJf1RKNG2cHG13WE";
-// const char* justThe URL = 
-// const char* justTheInstance =
-// const Char* the APIKey =
+const char* theURL =        "https://firestore.googleapis.com";
+const char* theInstance =   "/v1/projects/smart-hurley-test/databases/(default)/documents/test_data";
+const char* theAPIKey =     "?key=AIzaSyDp1ep5j_90oInc9v2YJf1RKNG2cHG13WE";
+// this is not very pretty, but it should; work
+// then we use 'theFullFirebaseURL' instead of 'firebaseURL'
+const char* partial1 = strcat(theURL, theInstance);
+const char* theFullFirebaseURL = strcat(partial1, theAPKey);
 
+/* Question:
+What is the capabilityt of the firebase instance? 
+Is it a full database? 
+Could we be setting up tables and relationships between tables in firebase ?
+Could we be defining functions or routines directly in the Database?
+*/
 
+////////// ////////// ////////// //////////
+// The usual setup function as found in all Arduibno sketches.
 void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, password);
@@ -37,8 +50,10 @@ void setup() {
     Serial.print(".");
   }
   Serial.println("\nConnected!");
-}
+} // end of the setup function
+////////// ////////// ////////// //////////
 
+////////// ////////// ////////// //////////
 void loop() {
   // how about some comments, for a start?
   if(WiFi.status() == WL_CONNECTED){
@@ -64,4 +79,6 @@ void loop() {
   }
 
   delay(5000);
-}
+
+ } // end of the loo function
+////////// ////////// ////////// //////////
