@@ -1,0 +1,46 @@
+<!--
+Joshua Geoghegan
+JG20251203-01
+Web page to send random data values to the firebase end-point
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Data Sender</title>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+</head>
+<body>
+    <h1>Firebase Data Sender</h1>
+    <button id="sendDataBtn">Send Random Data to Firebase</button>
+    <p id="status"></p>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY", 
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };  
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        document.getElementById('sendDataBtn').addEventListener('click', () => {
+            const randomData = Math.floor(Math.random() * 100);
+            database.ref('randomData').set(randomData)
+                .then(() => {
+                    document.getElementById('status').textContent = 'Data sent: ' + randomData;
+                })
+                .catch((error) => {
+                    document.getElementById('status').textContent = 'Error: ' + error.message;
+                });
+        });
+    </script>
+</body>
+</html>

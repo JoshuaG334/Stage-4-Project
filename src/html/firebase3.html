@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <!-- some of this is taken from https://www.geeksforgeeks.org/firebase/introduction-and-setup-of-cloud-firestore-in-your-project/ -->
+<head>
+  <title>Firebase App</title>
+</head>
+<body>
+
+<h1>Welcome to Firebase App</h1>
+
+  <!-- the following script block establishes a connection to the firebase database
+  It appears to work OK, as it returns a valid app from the initializeApp function
+  However, when I tried sending some data, based on a submit button, I got the familiar
+  message to the effect that firebase did dnot exist -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+    import { getFirestore, collection, doc, setDoc, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDYihlGnHUR0oY-Y-vpF9AqE-508rZ6ChM",
+      authDomain: "basic-41113.firebaseapp.com",
+      projectId: "basic-41113",
+      storageBucket: "basic-41113.firebasestorage.app",
+      messagingSenderId: "702677428026",
+      appId: "1:702677428026:web:6c70acc7a412963bb5d203"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    console.log("Firebase initialized:", app);
+    console.log("------------------------------")
+
+    const firestore = getFirestore(app);
+    console.log("Firestore reference:", firestore);
+    console.log("------------------------------")
+
+    var database = getDatabase(app);
+    console.log("Database reference:", database);
+    console.log("------------------------------")
+
+    const randomData = Math.floor(Math.random() * 100);
+
+  // Add a new document with a generated id
+  const newCityRef = doc(collection(firestore, "cities"));
+ 
+  // Create a reference to the users collection
+  const userRef = doc(firestore, "courses", "001");
+  await setDoc(userRef, {
+    name: "John Doe",
+    age: 30,
+    randomData: randomData
+  });
+  console.log("Document written with ID: ", userRef.id);
+  
+  </script>
+
+</body>
+</html> 
