@@ -1,0 +1,55 @@
+Week 10 
+
+Discussed the option of using the Arduino nano 33 BLE Sense Rev2 with Ben. 
+
+-BLE 
+
+-Comes with gesture recognition (APDS9960 Sensor) 
+
+Using the Arduino create cloud editor 
+
+ 
+
+The BMI270 vs BMI160 
+
+-Lower Noise , faster processing 
+
+-Lower power consumption 
+
+ 
+
+Use TinyML & TensorFlow Lite for machine learning , that will have to be done through trial and  
+
+Error as there is no data or library's for this project that will help with the machine leaning 
+
+ 
+
+There will be two phases to this ,  
+
+Going out and hitting the sliotar with the hurl, with the nano attached recording data (machine leaning) 
+
+Second half is the machine recognizing data and correctly counting it or not counting it 
+
+ 
+
+ 
+
+The piezo is also not really needed as the IMU with pick up the "stutter" as the hurl will slow down when it hits the ball 
+
+Rules out the PCB aspect of the project  
+
+ 
+
+This changes the way the architecture is:  nano 33 --> firebase --> android studio 
+
+ 
+
+Since there is no Wi-Fi on the nano 33 , the phone will now be the hub , 
+
+This is better as the old way means if the user deletes the app the data will be lost 
+
+ 
+
+Doc found on edge pulse to help with the machine learning part: 
+
+https://docs.edgeimpulse.com/tutorials/end-to-end/motion-recognition 

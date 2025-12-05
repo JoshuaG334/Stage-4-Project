@@ -1,0 +1,24 @@
+Week 7 
+
+ 
+
+Week Ending: 11/07/2025 
+
+ 
+
+Wireless Logging via BLE: 
+This week, I learned about BLE GATT notifications and how they allow a device to automatically push data to a connected smartphone without the phone constantly requesting updates. I have planned to implement this in my project by configuring the ESP32 as a GATT server with a characteristic for strike data which the Android app acting as a GATT client will subscribe to. Each confirmed strike will trigger a notification, sending the count, timestamp, and intensity to the app in real time for logging and gamified feedback. 
+
+ 
+
+Android App: 
+
+Determined that a custom Android app using Android Studio is the most suitable option (because I have recently started a module leaning that software) for receiving strike data and supporting gamified feedback streaks, achievements. 
+
+BLE workflow: ESP32 acts as a GATT server, exposing characteristics for strike data, while the Android app acts as a GATT client subscribing to notifications. 
+
+ 
+
+Presentation: 
+
+Finalized scope presentation. 

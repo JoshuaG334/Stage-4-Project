@@ -1,0 +1,45 @@
+Week 6
+
+Week ending 24/10/2025 
+
+ 
+
+This week I finalized the core sensor's for the Smart Hurley and explored smart sports equipment in other fields to benchmark features and validate design choices. I also evaluated microcontroller options and began outlining the system architecture. 
+
+ 
+
+Sensors: 
+
+Motion Tracking: Selected the BMI160 IMU for 6-axis motion sensing accelerometer + gyroscope, ideal for capturing swing speed, rotation, and movement patterns. 
+
+-Library's and tutorials online using the sensor on the Arduino IDE 
+
+ 
+
+Impact Detection: Chose the Murata 7BB-20-6L0 piezoelectric sensor to detect strike events and measure impact force. 
+
+-Small Piezo, No buzzer  
+
+ 
+
+Wireless Communication: Decided to use a microcontroller with built-in Bluetooth, eliminating the need for a separate Bluetooth module. The specific board (ESP32 DevKit V1, FireBeetle C6) is still under evaluation. 
+
+ 
+
+Exploration of Similar Equipment 
+
+To benchmark the Smart Hurley concept I researched smart sports equipment in tennis which has seen significant innovation in motion and impact tracking: 
+
+ 
+
+Babolat Play and Zepp Tennis Sensor use IMUs accelerometers + gyroscopes to track swing speed, stroke type, and racket orientation. This is directly comparable to my use of the BMI160 which offers similar motion tracking capabilities tailored to hurling. 
+
+ 
+
+These tennis systems also include impact detection algorithms, often based on vibration analysis. My project uses a piezo sensor for this purpose, which provides a physical signal when the hurley strikes a sliotar or surface. 
+
+ 
+
+Next Step 
+
+Finalize microcontroller selection based on size, power, and compatibility. 

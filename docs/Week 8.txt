@@ -1,0 +1,90 @@
+Week 8 
+
+
+This week I focused on the power system design for the Smart Hurley, researching battery options, charging circuitry, and protection requirements for a safe and reliable embedded system. 
+
+ 
+
+Battery Selection 
+
+ 
+
+To determine the most suitable power source for the Smart Hurley, I evaluated several common battery types coin cells, AA/AAA NiMH packs, Li-ion cylindrical cells, and single-cell Li-Po batteries. The decision was based on four criteria: 
+
+ 
+
+1. Required current draw (IMU + piezo + microphone + BLE microcontroller) 
+2. Physical size and weight, since everything must fit inside the hurley handle 
+3. Rechargeability and ease of integrating a charging module 
+4. Ability to handle peak loads, especially during Bluetooth transmission 
+
+ 
+
+Power Requirements 
+
+ 
+
+The ESP32 can draw 80–250 mA during BLE transmissions  while the sensors add another 10–30 mA depending on sampling rate. 
+
+https://blog.usro.net/2025/04/understanding-esp32-power-consumption-full-breakdown/?utm_source 
+
+ 
+This means the system needs a battery that can comfortably supply 120–300 mA bursts without voltage collapse. 
+
+ 
+
+Why the other battery options didn’t work 
+
+ 
+
+Coin Cells 
+
+They only provide 3V, which is too low for the ESP32. 
+
+They cannot supply the high current bursts required for BLE they are limited to 20 mA. 
+
+Voltage collapses instantly under load device resets. 
+
+Non-rechargeable 
+
+ 
+
+ 
+
+ AA/AAA 
+
+A 3-cell pack gives only 3.6V, which drops to 3.0V under load borderline for ESP32 
+
+A 4-cell pack gives 4.8V requiring step-down regulation more heat & space 
+
+Physically too large and heavy for inside a hurley 
+
+ 
+
+Li-ion Cylindrical Cells 
+
+18650 cells are far too large for the hurley handle 
+
+ 
+
+ 
+
+Why the 3.7V Li-Po battery was the best fit 
+
+ 
+
+Li-Po voltage ranges 3.0–4.2V ideal for an ESP32 board with onboard regulators. 
+
+No boost/step-down converter required simpler more efficient power system. 
+
+Easily supplies 300–500 mA more than enough for BLE peaks. 
+
+Flat pouch-style cells fit naturally in the hurley handle. 
+
+Low weight avoids affecting balance or swing feel. 
+
+Works perfectly with the TP4056 charger, allowing safe USB charging. 
+
+Built-in overcharge / over-discharge protection is common on Li-Po packs. 
+
+ 
