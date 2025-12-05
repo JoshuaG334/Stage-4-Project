@@ -1,6 +1,14 @@
+<!--
+Joshua Geoghegan
+JG-12-05-2025 -->
+
+<!--This code initializes a Firebase app and connects to Firestore-->
+<!--It generates a random number when the "Send Random Data" button is clicked-->
+<!--and writes it to a specific document in the "courses" collection-->
+<!-- The page also displays a status message indicating whether the data was successfully sent or if an error occurred-->
+<!-- getDatabase is not used , it is apart of the Realtime Database , This project is currently using Firestore database-->
 <!DOCTYPE html>
 <html>
-  <!-- some of this is taken from https://www.geeksforgeeks.org/firebase/introduction-and-setup-of-cloud-firestore-in-your-project/ -->
 <head>
   <title>Firebase App</title>
 </head>
@@ -8,57 +16,65 @@
 
 <h1>Welcome to Firebase App</h1>
 
-  <!-- the following script block establishes a connection to the firebase database
-  It appears to work OK, as it returns a valid app from the initializeApp function
-  However, when I tried sending some data, based on a submit button, I got the familiar
-  message to the effect that firebase did dnot exist -->
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-    import { getDatabase } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
-    import { getFirestore, collection, doc, setDoc, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+<!-- Button to trigger sending random data to Firestore -->
+<button id="submitBtn">Send Random Data</button>
+<!-- Paragraph to display status messages such as success or error -->
+<p id="status"></p>
 
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+<!-- Import Firebase modules needed for app initialization and Firestore access -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDYihlGnHUR0oY-Y-vpF9AqE-508rZ6ChM",
-      authDomain: "basic-41113.firebaseapp.com",
-      projectId: "basic-41113",
-      storageBucket: "basic-41113.firebasestorage.app",
-      messagingSenderId: "702677428026",
-      appId: "1:702677428026:web:6c70acc7a412963bb5d203"
-    };
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDYihlGnHUR0oY-Y-vpF9AqE-508rZ6ChM",
+    authDomain: "smart-hurley-test.firebaseapp.com",
+    projectId: "smart-hurley-test",
+    storageBucket: "smart-hurley-test.firebasestorage.app",
+    messagingSenderId: "225681247262",
+    appId: "1:225681247262:web:e4823270af67e2bce3b20f"
+  };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    console.log("Firebase initialized:", app);
-    console.log("------------------------------")
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  // Initialize Firestore database for reading/writing documents
+  const firestore = getFirestore(app);
 
-    const firestore = getFirestore(app);
-    console.log("Firestore reference:", firestore);
-    console.log("------------------------------")
-
-    var database = getDatabase(app);
-    console.log("Database reference:", database);
-    console.log("------------------------------")
-
-    const randomData = Math.floor(Math.random() * 100);
-
-  // Add a new document with a generated id
-  const newCityRef = doc(collection(firestore, "cities"));
- 
-  // Create a reference to the users collection
-  const userRef = doc(firestore, "courses", "001");
-  await setDoc(userRef, {
-    name: "John Doe",
-    age: 30,
-    randomData: randomData
-  });
-  console.log("Document written with ID: ", userRef.id);
+  // Log Firebase app initialization to the console for debugging
+  console.log("Firebase initialized:", app);
   
-  </script>
+
+  // Function to send data
+  async function sendData() {
+    const randomData = Math.floor(Math.random() * 100); // Generate random number
+
+    // Create's a reference to a specific document in the 'courses' collection with ID '001'
+    const userRef = doc(firestore, "courses", "001"); // Firestore path
+
+    try {
+      // Write data to Firestore document, overwriting any existing data
+      await setDoc(userRef, {
+        name: "John Doe",
+        age: 30,
+        randomData: randomData
+      });
+      // Log success to console
+      console.log("Document written:", userRef.id);
+      document.getElementById("status").textContent = "Data sent: " + randomData;
+      // Log any errors to the console
+    } catch (error) {
+      // Show error message in the status paragraph
+      console.error("Error writing document:", error);
+      document.getElementById("status").textContent = "Error: " + error.message;
+    }
+  }
+
+  // Attach the sendData function to the click event of the submit button
+  // When the button is clicked, sendData() will run
+  document.getElementById("submitBtn").addEventListener("click", sendData);
+
+</script>
 
 </body>
-</html> 
+</html>
