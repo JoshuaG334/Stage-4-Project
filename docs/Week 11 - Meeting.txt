@@ -1,0 +1,45 @@
+Week 11 - Meeting
+
+12/03/2025 
+
+ 
+
+In this week’s meeting with my supervisor we discussed several important aspects of the project particularly around sensor selection data transmission and the way the machine learning model will eventually be trained.  
+
+One of the key points raised was the importance of building the AI using correct representative and high quality training data. My supervisor highlighted a common issue seen in early image recognition systems where models trained on limited datasets failed to generalize to real world conditions. For example, early autonomous systems struggled to recognize stop signs that were slightly damaged, dirty or partially obscured because the model had only been trained on perfect clean images.  
+
+This demonstrated how even small inconsistencies in the training dataset can lead to significant misclassification errors reinforcing that my model must be trained using realistic strike data collected across different players and hurl positions. 
+
+We also discussed the possibility of using the onboard microphone on the Arduino Nano 33 BLE Sense Rev2 to investigate whether the “sweet spot” of a hurl produces a distinct acoustic profile. If clear differences are present in the audio recordings, the microphone could become an additional sensor input to strengthen the model and help distinguish between strike types or contact locations. This idea remains exploratory, but it reinforces the benefit of choosing hardware with multiple integrated sensing modalities. 
+
+ 
+
+A major focus of the meeting was comparing the suitability of the ESP32 and the Arduino Nano 33 BLE Sense Rev2 for the final design. The ESP32 is still a strong contender because it is powerful, inexpensive and supports both Wi-Fi and Bluetooth Low Energy. Its dual core processor allows it to handle continuous sensor sampling alongside wireless transmission and it can communicate directly with cloud platforms such as Firestore. Its BLE implementation is based on Bluetooth 4.2 and does not match the stability, efficiency or throughput of Bluetooth 5.0 devices. In situations where BLE streaming is essential the ESP32 typically requires an external BLE module to achieve more reliable performance which adds extra hardware complexity. 
+
+ 
+
+The Arduino Nano 33 BLE Sense Rev2 offers several advantages that align well with a wearable sensing system. Its Bluetooth 5.0 radio provides better connection stability and higher real world throughput which is important for high rate IMU streaming. The board also includes the BMI270 IMU which provides improved zero drift performance more stable bias characteristics and better vibration rejection compared to the older BMI160 typically used with the ESP32. This makes the BMI270 more reliable for capturing rapid wrist movements and strike dynamics. Since the IMU, microphone and other sensors are built into the Nano the design avoids additional wiring, noise and potential hardware faults. 
+
+ 
+
+Although the ESP32 lacks these integrated sensors it still has strengths that make it useful depending on the system architecture. Its processing power and built in Wi-Fi make it ideal for cloud connected applications, and it remains a cost effective platform for developing prototypes. The drawback is its higher power consumption lower BLE performance and the need to add external sensors for motion and audio data 
+
+ 
+
+We also examined the difference between running the machine learning model on the device versus sending all sensor data to a cloud-based AI system. The Nano 33 BLE Sense Rev2 includes on-chip support for embedded machine learning through TensorFlow Lite for Microcontrollers allowing the inference model to run locally. This means the board would only transmit low bandwidth outputs dramatically reducing BLE traffic. In contrast using cloud based ML requires transmitting the full IMU or audio data streams resulting in much higher data rates and more battery usage. The cloud approach offers greater flexibility for retraining and updating models without flashing hardware but it introduces latency and significantly increases the volume of data being transmitted 
+
+ 
+
+https://daischsensor.com/the-imu-drift-causes-effects-and-solutions  
+
+ 
+
+https://www.preprints.org/manuscript/202306.1530#sec4-preprints-77258 
+
+ 
+
+https://docs.aws.amazon.com/ko_kr/wellarchitected/latest/iot-lens/reduce-the-amount-of-data-transmitted.html 
+
+ 
+
+IMU = Inertial Measurement Unit 
