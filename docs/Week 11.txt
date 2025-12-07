@@ -1,0 +1,36 @@
+Week 11  
+
+
+This week I focused on researching the machine learning side of the project especially how the choice of hardware and data handling approach affects the accuracy and performance of the system.  
+
+I looked deeper into the differences between on device machine learning using the Nano 33 BLE Sense’s built-in ML capabilities and cloud based machine learning and how each method impacts bandwidth, latency, and data rates.  
+
+I also reviewed how important it is to use well labelled and representative training data when developing the strike detection AI model. Incorrect or low quality data can cause the model to misclassify sensor patterns, which would reduce the reliability of the strike detection. This reinforced the need to gather consistent, controlled swing data for training and validation. 
+
+ 
+
+I also compared the Bluetooth performance of the ESP32 Bluetooth 4.2 and the Nano 33 BLE Sense Bluetooth 5.0.  
+
++20-30 meter's  
+
+1MB vs 2MB max rate 
+
+ 
+
+Bluetooth 5.0 offers higher data rates increased range and larger advertising packet sizes which could benefit real time sensor streaming if required. I researched the BMI270 IMU as well, which offers improved zero drift performance and vibration rejection compared to the BMI160 meaning it provides more stable tracking and is less affected by sudden shocks during a strike. 
+
+ 
+
+Edge vs cloud: 
+
+I looked into whether it is more efficient to run the machine learning model directly on the microcontroller or to send raw IMU and microphone data to the cloud. Several sources showed that sending raw motion/audio data produces a much higher data rate while sending a single classification result is significantly lighter. This means on device ML could reduce BLE traffic and power consumption. 
+
+ 
+
+https://www.mdpi.com/2504-2289/9/5/121 
+
+ 
+
+**Tiny machine learning , Edge vs Cloud** 
+
+https://pmc.ncbi.nlm.nih.gov/articles/PMC12115890/  
