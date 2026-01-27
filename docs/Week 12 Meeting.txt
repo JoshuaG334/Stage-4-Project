@@ -1,0 +1,43 @@
+Explain why the Bluetooth 5.0 capabilities are necessary for this project 
+
+ 
+
+Could you use 4.2 or 4.0 , is the range the deciding factor ,  
+
+Could you use multiple Arduinos on the pitch, one in each corner, that could be expensive  
+
+ 
+
+Explore all the options and find the best fit for this Project 
+
+ 
+
+Why is the 2MB data rate necessary , how much data will I be sending , what will my sampling rate be ? 
+
+If I have 20 players using it the data will x20 so the 5.0 will be necessary  
+
+ 
+
+Need to do a lot more reading on the edge vs cloud ML I need to be confident with the decision 
+
+Will there be a large amount of ML happening on the device and a small amount of data being sent to database or will there be no ML happening on nano and using the cloud and sending constant "medium" sized data  
+
+ 
+
+Need to break down the project into small modules that you can simulate data on both ends to show a certain module works  
+
+ 
+
+Do not need the nano to start this can be done with .txt files showing the data going through the AI 
+
+ 
+
+Simulating parts of the project not all at once: 
+
+ 
+
+Fake data ---> Arduino ----> Database 
+
+IMU ---> Nano ---> json file 
+
+.TXT ---> DATABASE 
