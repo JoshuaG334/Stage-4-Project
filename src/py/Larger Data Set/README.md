@@ -12,7 +12,7 @@ This repository contains Python and Arduino scripts used to record accelerometer
 | File | Description |
 |------|-------------|
 | `imu_to_csv.ino` | Arduino sketch that sends accelerometer readings over serial with activity label. |
-| `serial_to_csv.py` | Python script to record walking accelerometer data into `walking.csv`. |
+| `walking_to_csv.py` | Python script to record walking accelerometer data into `walking.csv`. |
 | `idle_csv.py` | Python script to record idle accelerometer data into `idle.csv`. |
 | `data_features.py` | Extracts statistical features (mean, std, max, min, RMS) from raw CSVs into feature CSVs for ML training. |
 | `train_model.py` | Trains and evaluates a K-Nearest Neighbors classifier using the extracted features. |
