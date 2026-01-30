@@ -1,0 +1,35 @@
+Week 13 weekly log
+
+To familiarize with the machine learning workflow for human activity recognition, using an Arduino Nano 33 BLE Sense to record accelerometer data and train a simple classifier for walking and idle activities. 
+
+ 
+
+ 
+
+Connected the Arduino Nano 33 BLE Sense to a computer via USB. 
+
+Tested accelerometer readings using a basic Arduino sketch. 
+
+ 
+
+Created imu_to_csv.ino to send labeled accelerometer readings over serial. 
+
+Recorded walking data using walking_to_csv.py, capturing realistic movement including slight turns and handheld variation. Recorded idle data using idle_csv.py capturing stationary readings. 
+
+ 
+
+data_features.py to compute features from raw accelerometer data = mean, standard deviation, max, min, and RMS of the magnitude over 1 second windows. Generated walking_features.csv and idle_features.csv for ML training. 
+
+ 
+
+train_model.py to train a K-Nearest Neighbors (KNN) classifier using extracted features. 
+
+Split dataset into 80% training and 20% testing. Achieved 100% accuracy on the small test set. 
+
+Evaluated performance using a confusion matrix to ensure correct classification of walking vs idle samples. 
+
+ 
+
+Walking variation was simulated by adjusting speed and making turns idle is mostly stationary. 
+
+ 
