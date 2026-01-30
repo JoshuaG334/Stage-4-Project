@@ -12,7 +12,7 @@ This repository contains Python and Arduino scripts used to record accelerometer
 | File | Description |
 |------|-------------|
 | `imu_to_csv.ino` | Arduino sketch that sends accelerometer readings over serial with activity label. |
-| `serial_to_csv.py` | Python script to record walking accelerometer data into `walking.csv`. |
+| `walking_to_csv.py` | Python script to record walking accelerometer data into `walking.csv`. |
 | `idle_csv.py` | Python script to record idle accelerometer data into `idle.csv`. |
 | `data_features.py` | Extracts statistical features (mean, std, max, min, RMS) from raw CSVs into feature CSVs for ML training. |
 | `train_model.py` | Trains and evaluates a K-Nearest Neighbors classifier using the extracted features. |
@@ -24,7 +24,7 @@ This repository contains Python and Arduino scripts used to record accelerometer
 1. **Record Data**
    - Connect your Arduino Nano 33 BLE Sense to the computer.
    - Upload `imu_to_csv.ino` to the Arduino.
-   - Run `serial_to_csv.py` to record walking data.  
+   - Run `walking_to_csv.py` to record walking data.  
    - Run `idle_csv.py` to record idle data.
    - Press **Ctrl+C** to stop recording. Data will be saved in CSV format.
 
