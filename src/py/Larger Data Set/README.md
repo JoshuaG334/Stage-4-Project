@@ -24,7 +24,7 @@ This repository contains Python and Arduino scripts used to record accelerometer
 1. **Record Data**
    - Connect your Arduino Nano 33 BLE Sense to the computer.
    - Upload `imu_to_csv.ino` to the Arduino.
-   - Run `serial_to_csv.py` to record walking data.  
+   - Run `walking_to_csv.py` to record walking data.  
    - Run `idle_csv.py` to record idle data.
    - Press **Ctrl+C** to stop recording. Data will be saved in CSV format.
 
