@@ -1,0 +1,27 @@
+Week 14 Weekly Report
+
+This week the focus was on implementing and validating a machine learning based classifier for real time activity detection on the Arduino Nano 33 BLE Sense Rev2. Initial attempts using raw accelerometer axes (ax, ay, az) were highly orientation dependent, the classifier only worked reliably when the board was positioned in a specific orientation. This limitation made the previous threshold based approach unsuitable for practical use, as the device’s orientation can vary significantly during motion or idle states. 
+
+ 
+
+the magnitude of acceleration was computed as a single orientation-invariant feature: 
+
+Mag_mean = sqrt/ ax^2 + ay^2 + az^2 
+
+ 
+
+This feature provides a scalar representation of overall motion intensity, independent of the board’s orientation. A logistic regression model was trained on labelled magnitude data collected across multiple orientations for both idle and walking states. The trained model provided a weight (w) and bias (b) for classification add the formula later 
+
+ 
+
+Predictions were then made by comparing the probability to a threshold of 0.5  
+
+probabilities above the threshold indicated walking, while probabilities below indicated idle. 
+
+ 
+
+To further improve robustness, a sliding window mean over a fixed number of samples was applied, smoothing out sensor noise and transient spikes. This combination of magnitude based feature extraction, logistic regression, and temporal smoothing enabled reliable activity classification regardless of sensor orientation, providing a solid foundation for extending the system to detect hurley specific motion and impacts in later stages. 
+
+ 
+
+ ML implementation successfully demonstrated real time classification of idle and walking activities on the Nano 33 BLE Sense 
