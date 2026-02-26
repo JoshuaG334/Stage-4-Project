@@ -4,16 +4,20 @@
 //This program reads and outputs data from BOTH the accelerometer and gyroscope
 // simultaneously. The header shows a measured sampling rate of 67.4 Hz when
 // both sensors are enabled.
-
+//---------------------------------
+// at 115200 baud
 // Δt=15810673−15795836 = 14,837 µs
 // 67.4 Hz
-
+//--------------------------------
+// at 921600 baud
+// Δt=44813779−44797512 = 16,267 µs
+// 61.5 Hz
 
 // Library for BMI270
 #include <Arduino_BMI270_BMM150.h>
 
 void setup() {
-  Serial.begin(115200); // Initialize serial communication at 115200 baud
+  Serial.begin(921600); // Initialize serial communication at 115200 baud
   while (!Serial);      // Wait for serial port to connect 
 
   // Initialize the IMU sensor
