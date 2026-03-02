@@ -1,0 +1,13 @@
+Week 15 
+
+This week, a BLE lab was conducted to validate wireless communication between the Arduino Nano 33 BLE Sense Rev2 and an external device. The objective was to establish a reliable pathway for real time IMU data streaming for the Smart Hurley system. 
+
+ 
+
+A custom BLE service and characteristic were implemented on the Nano 33 BLE Sense using the ArduinoBLE library. The characteristic was configured to support GATT notifications, allowing the board to automatically push updated sensor values to a connected client without repeated polling. The service and characteristic were assigned a custom UUID (19b10000-e8f2-537e-4f6c-d104768a1214), which was used by the Python script on the PC to connect to the board via its BLE MAC address and display live data in real time. 
+
+ 
+
+Initial connection issues on the rf connect mobile app, where the device appeared as “connectable: no,” were resolved by adjusting the BLE initialization sequence. Testing was performed while powering the board via a portable power bank to simulate untethered operation. The lab confirmed that Python based streaming over GATT notifications using the MAC address and UUID for precise identification, is stable and effective providing a validated wireless communication pathway for future IMU data collection threshold debugging, and potential integration with a mobile application. 
+
+ 

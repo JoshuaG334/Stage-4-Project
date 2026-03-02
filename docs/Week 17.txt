@@ -1,0 +1,29 @@
+Week 17 
+
+IMU Sampling Rate 
+
+ 
+
+This week focused on characterizing the effective sampling rate of the Arduino Nano 33 BLE Sense Rev2 IMU system and identifying system bottlenecks relevant to Smart Hurl impact capture. 
+
+Initial testing was performed using timestamp only serial transmission. At 921600 baud, the system achieved a stable throughput of approximately 3500 Hz with no detected timestamp jumps. This confirmed that USB serial communication and the Python logging script are not limiting factors. 
+
+ 
+
+Tests were conducted using real IMU data. When streaming accelerometer data only, the measured sampling rate was approximately 100 Hz across multiple baud rates (9600–250000). Since the rate remained constant regardless of baud rate, it was concluded that serial communication is not the bottleneck. Instead the limiting factor is the BMI270 accelerometer’s default Output Data Rate (ODR), which is approximately 100 Hz. 
+
+ 
+
+When both accelerometer and gyroscope data were sampled simultaneously, the effective measured sampling rate reduced to approximately 60–70 Hz. This reduction is attributed to the sensor data readiness timing and loop logic requiring both sensors to be available before transmission. 
+
+ 
+
+Serial bandwidth is capable of supporting >3000 Hz timestamp only test. 
+
+The default BMI270 accelerometer ODR limits sampling to ~100 Hz. 
+
+Simultaneous accelerometer and gyroscope reads reduce effective output to ~60–70 Hz. 
+
+Baud rate does not significantly influence sampling frequency under current IMU configuration. 
+
+ 
