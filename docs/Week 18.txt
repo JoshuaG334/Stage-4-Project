@@ -1,0 +1,63 @@
+Week 18
+
+Inspection of the Arduino BMI270 library revealed the accelerometer and gyroscope Output Data Rate (ODR) were hardcoded as: 
+
+ 
+
+sens_cfg[0].cfg.acc.odr = BMI2_ACC_ODR_100HZ; 
+
+sens_cfg[1].cfg.gyr.odr = BMI2_GYR_ODR_100HZ; 
+
+ 
+
+This confirmed that the default IMU sampling rate was limited to approximately 100 Hz 
+
+ 
+
+ODR Increased to 400 Hz 
+
+Both accelerometer and gyroscope ODR were modified to: 
+
+BMI2_ACC_ODR_400HZ 
+
+BMI2_GYR_ODR_400HZ 
+
+ 
+
+Measured effective sampling rate: 
+
+~150 Hz 
+
+Although the internal ODR was increased to 400 Hz, the delivered sampling rate did not reach 400 Hz. 
+
+ 
+
+ODR Increased to 800 Hz 
+
+Both sensors were then configured to: 
+
+BMI2_ACC_ODR_800HZ 
+
+BMI2_GYR_ODR_800HZ 
+
+ 
+
+Measured effective sampling rate: 150Hz 
+
+ 
+
+Increasing ODR beyond 400 Hz did not increase effective output rate. 
+
+Attempts to configure higher than 800 Hz resulted in configuration errors 
+
+ 
+
+I2C Clock Speed Increased 
+
+The I2C clock was increased to 1 MHz using: Wire.setClock(1000000); 
+
+ 
+
+This was only accelerometer 
+
+Measured effective sampling rate: 155 Hz  

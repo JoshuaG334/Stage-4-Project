@@ -1,0 +1,29 @@
+Week 19
+
+Objective: 
+
+Maximize the IMU sampling rate for the Arduino Nano 33 BLE Sense Rev2 when streaming accelerometer and gyroscope data over serial to a PC AGAIN. 
+
+ 
+
+Baseline 
+
+Starting point was approximately 67–90 Hz when reading both accelerometer and gyroscope simultaneously using the default library configuration and float-based serial printing. 
+
+ 
+
+Integer printing instead of floats Serial.print(ax, 3) internally converts a floating point number to a human readable string character by character on the microcontroller, which is computationally expensive. Replacing it with Serial.print((int)(ax * 1000)) sends a whole number instead the microcontroller just prints digits with no decimal conversion overhead. The precision is identical since multiplying by 1000 preserves 3 decimal places, it just shifts the decimal point and lets Python divide it back on the receiving end where CPU power is not a constraint. 
+
+ 
+
+Bulk serial reading in Python The original ser.readline() call blocks Python completely while it waits for one line to arrive, then processes it, then waits for the next. This means Python is idle for most of the time while the Arduino keeps sending. Switching to ser.read(ser.in_waiting) drains everything currently sitting in the buffer in a single call, so Python processes many lines per iteration instead of one. This stops the buffer from backing up. 
+
+ 
+
+Batch CSV writing Calling writer.writerow() on every single sample triggers a disk write operation each time, which involves the OS file system and is relatively slow. By collecting 50 rows in a Python list first and calling writer.writerows(batch) once, the number of disk operations is reduced 50x. The data is identical it just gets written to disk less frequently, freeing up CPU time for reading serial data. 
+
+ 
+
+Removing the timestamp from Arduino output Each line the Arduino sends over serial takes a fixed amount of time to transmit based on its length. The timestamp (micros()) added roughly 10 extra characters to every line for example 123456789, at the start. Removing it shortened each line by about 40%, meaning the same baud rate could carry proportionally more lines per second. Python generates its own timestamp on receive using time.perf_counter() which is actually more accurate anyway since it avoids the transmission delay skewing the Arduino-side time. 
+
+ 
