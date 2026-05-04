@@ -1,4 +1,5 @@
-# Smart Hurley - TinyML Pipeline & Feature Explanation ----- *** Version 1 ***
+# Smart Hurley - TinyML Pipeline & Feature Explanation ----- 
+# NN - Version 1 ***
 
 # Joshua Geoghegan 
 # 3/27/2026
