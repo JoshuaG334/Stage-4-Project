@@ -1,5 +1,5 @@
 # Smart Hurley - Neural Network Architecture
-
+# NN - Version 1
 **Author:** Joshua Geoghegan  
 **Project:** Smart Hurley with TinyML  
 **TU Dublin - BEng (Hons) Computer Engineering - Mobile Systems**
