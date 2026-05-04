@@ -1,0 +1,13 @@
+Week 24
+
+Report finished and New addition made to the neural network. 
+
+ 
+
+Instead of having 3 fake hits in 1 csv and 3 swings in 1 csv  
+
+I split them into 6 csv , so 1 action per csv 
+
+ 
+
+This added onto the accuracy of the NN from 96% to 99% 

@@ -1,0 +1,25 @@
+Week 21
+
+Report and App development 
+
+ 
+
+Working connection between nano and android studio 
+
+Displays classification and records swings and impacts 
+
+ 
+
+Also a working node-red flow , from android studio to node-red --> PostgreSQL 
+
+ 
+
+Need to add to the app very basic,  
+
+decay rate sweet spot display  
+
+an end session button 
+
+Session results 
+
+Some stats  

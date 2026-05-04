@@ -1,0 +1,11 @@
+Week 22
+
+Report & and testing out of CNN neural network  
+
+It learns its own features from the raw waveforms  
+
+This will need ALOT more data 
+
+Current score was a 86% accuracy compared to current 93% with the feedforward neural network 
+
+Had a hard time disguising idle and fake_hit maybe due to the micromovements 

@@ -1,0 +1,26 @@
+Week 20
+
+Relocated sensor to the bás of the hurley and analyze strike quality using vibration decay rate. 
+
+ 
+
+The sensor was moved from the handle to the bás on the supervisor's recommendation. The bás is the point of ball contact so impact vibrations are strongest there. 
+The accelerometer range in BMI270.cpp was also updated from 8G to 16G to prevent clipping of high G impact events 
+and the INT16_to_G conversion factor was corrected from 4096 to 2048 to match the new range. 
+
+ 
+
+Vibration Decay Rate Analysis After a ball strike the hurley vibrates at its natural resonant frequency. The rate at which this 
+vibration dampens follows an exponential decay curve A(t) = A₀ × e^(−λt). The decay rate constant lambda (λ) and its derived half-life 
+describe how quickly the vibration dies out after impact. 
+
+ 
+
+A high lambda and short half-life indicate the energy transferred cleanly into the ball characteristic of a sweet spot hit. 
+A low lambda and long half-life indicate the hurley retained vibration energy  characteristic of an off center strike. 
+
+Two recording sessions with similar peak G values (~21–23G) produced dramatically different decay rates lambda 130–149 (half-life 4–5ms) 
+versus lambda 12–16 (half-life 42–56ms). This confirms that peak G alone is insufficient to characterize strike quality and that decay rate 
+is an independent metric capturing contact quality. 
+
+ 
