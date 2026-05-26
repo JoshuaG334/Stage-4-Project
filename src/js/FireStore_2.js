@@ -15,7 +15,7 @@ const fs = require('fs');
 //Firebase Admin SDK
 const admin = require('firebase-admin');
 //Service account key
-const serviceAccount = require("C:\\Users\\joshm\\Documents\\4th year modules\\Project\\smart-hurley-test-firebase-adminsdk-fbsvc-6afeb4bd45.json");
+const serviceAccount = require("enter folder location");
 
 //Initialize Firebase using the service account credentials
 admin.initializeApp({
