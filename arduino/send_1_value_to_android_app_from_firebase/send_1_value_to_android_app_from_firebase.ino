@@ -5,7 +5,11 @@
 const char* ssid = "";
 const char* password = "";
 
+<<<<<<< Updated upstream
 const char* firebaseURL = "";
+=======
+const char* firebaseURL = "*******";
+>>>>>>> Stashed changes
 
 void setup() {
   Serial.begin(115200);

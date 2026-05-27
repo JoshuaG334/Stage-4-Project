@@ -1,0 +1,276 @@
+[
+    {
+        "id": "ab291da5d0cdc1d7",
+        "type": "tab",
+        "label": "Smart Hurl HTTP API",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4653e2e13d74e38b",
+        "type": "http in",
+        "z": "ab291da5d0cdc1d7",
+        "name": "POST /session/start",
+        "url": "/session/start",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "a1acec6ee74650b0"
+            ]
+        ]
+    },
+    {
+        "id": "a1acec6ee74650b0",
+        "type": "function",
+        "z": "ab291da5d0cdc1d7",
+        "name": "Build session params",
+        "func": "msg.params = [\n    msg.payload.player_name || 'Unknown',\n    msg.payload.notes || ''\n];\nreturn msg;",
+        "outputs": 1,
+        "x": 360,
+        "y": 80,
+        "wires": [
+            [
+                "fed055b783d98e48"
+            ]
+        ]
+    },
+    {
+        "id": "fed055b783d98e48",
+        "type": "postgresql",
+        "z": "ab291da5d0cdc1d7",
+        "name": "Insert session",
+        "query": "INSERT INTO sessions (player_name, notes) VALUES ($1, $2) RETURNING id;",
+        "postgreSQLConfig": "pg_config",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 590,
+        "y": 80,
+        "wires": [
+            [
+                "64f58d5ca30ba25e"
+            ]
+        ]
+    },
+    {
+        "id": "64f58d5ca30ba25e",
+        "type": "function",
+        "z": "ab291da5d0cdc1d7",
+        "name": "Format response",
+        "func": "msg.payload = {\n    status: 'ok',\n    session_id: msg.payload[0].id\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 800,
+        "y": 80,
+        "wires": [
+            [
+                "6777e86862eaae54"
+            ]
+        ]
+    },
+    {
+        "id": "6777e86862eaae54",
+        "type": "http response",
+        "z": "ab291da5d0cdc1d7",
+        "name": "",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 990,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "32cf97ad4a2de9c4",
+        "type": "http in",
+        "z": "ab291da5d0cdc1d7",
+        "name": "POST /event",
+        "url": "/event",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "bd73f17d3b03d7b4"
+            ]
+        ]
+    },
+    {
+        "id": "bd73f17d3b03d7b4",
+        "type": "function",
+        "z": "ab291da5d0cdc1d7",
+        "name": "Build event params",
+        "func": "msg.params = [\n    msg.payload.session_id,\n    msg.payload.classification,\n    msg.payload.confidence,\n    msg.payload.peak_g,\n    msg.payload.decay_lambda\n];\nreturn msg;",
+        "outputs": 1,
+        "x": 360,
+        "y": 200,
+        "wires": [
+            [
+                "e95d782e844630a2"
+            ]
+        ]
+    },
+    {
+        "id": "e95d782e844630a2",
+        "type": "postgresql",
+        "z": "ab291da5d0cdc1d7",
+        "name": "Insert event",
+        "query": "INSERT INTO events (session_id, classification, confidence, peak_g, decay_lambda) VALUES ($1, $2, $3, $4, $5) RETURNING id;",
+        "postgreSQLConfig": "pg_config",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 590,
+        "y": 200,
+        "wires": [
+            [
+                "ce4e4938676f22a1"
+            ]
+        ]
+    },
+    {
+        "id": "ce4e4938676f22a1",
+        "type": "function",
+        "z": "ab291da5d0cdc1d7",
+        "name": "Format response",
+        "func": "msg.payload = {\n    status: 'ok',\n    event_id: msg.payload[0].id\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 800,
+        "y": 200,
+        "wires": [
+            [
+                "2793b0bc09a45954"
+            ]
+        ]
+    },
+    {
+        "id": "2793b0bc09a45954",
+        "type": "http response",
+        "z": "ab291da5d0cdc1d7",
+        "name": "",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 990,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "2e1757b91e938225",
+        "type": "http in",
+        "z": "ab291da5d0cdc1d7",
+        "name": "POST /session/end",
+        "url": "/session/end",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "bcbc682789f6ee0f"
+            ]
+        ]
+    },
+    {
+        "id": "bcbc682789f6ee0f",
+        "type": "function",
+        "z": "ab291da5d0cdc1d7",
+        "name": "Build end params",
+        "func": "msg.params = [msg.payload.session_id];\nreturn msg;",
+        "outputs": 1,
+        "x": 360,
+        "y": 320,
+        "wires": [
+            [
+                "1753b2d41dc1e99a"
+            ]
+        ]
+    },
+    {
+        "id": "1753b2d41dc1e99a",
+        "type": "postgresql",
+        "z": "ab291da5d0cdc1d7",
+        "name": "End session",
+        "query": "UPDATE sessions SET ended_at = now() WHERE id = $1 RETURNING id;",
+        "postgreSQLConfig": "pg_config",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "f9994740f439fdd0"
+            ]
+        ]
+    },
+    {
+        "id": "f9994740f439fdd0",
+        "type": "function",
+        "z": "ab291da5d0cdc1d7",
+        "name": "Format response",
+        "func": "msg.payload = {\n    status: 'ok',\n    session_id: msg.payload[0].id,\n    ended: true\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 800,
+        "y": 320,
+        "wires": [
+            [
+                "b155f40a7f0d73ad"
+            ]
+        ]
+    },
+    {
+        "id": "b155f40a7f0d73ad",
+        "type": "http response",
+        "z": "ab291da5d0cdc1d7",
+        "name": "",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 990,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "pg_config",
+        "type": "postgreSQLConfig",
+        "name": "smarthurley",
+        "host": "localhost",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "smarthurley",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "nodered",
+        "applicationNameType": "str",
+        "max": "",
+        "maxFieldType": "num",
+        "idle": "",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "smarthurl",
+        "userFieldType": "str",
+        "password": "*********",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "4f89e5ac442a179a",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-postgresql": "0.15.4"
+        }
+    }
+]
