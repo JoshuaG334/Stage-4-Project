@@ -2,10 +2,10 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "DESKTOP-LPIC61A";
-const char* password = "12345678";
+const char* ssid = "";
+const char* password = "";
 
-const char* firebaseURL = "https://firestore.googleapis.com/v1/projects/smart-hurley-test/databases/(default)/documents/test_data?key=AIzaSyDp1ep5j_90oInc9v2YJf1RKNG2cHG13WE";
+const char* firebaseURL = "";
 
 void setup() {
   Serial.begin(115200);
