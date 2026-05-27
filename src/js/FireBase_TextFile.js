@@ -22,7 +22,7 @@ const admin = require('firebase-admin');
 //Load your Firebase service account JSON
 //Replace with the path to your downloaded key
 //Download key is in "project setting" --> service accounts --> generate new private key
-const serviceAccount = require("C:\\Users\\joshm\\Documents\\4th year modules\\Project\\smart-hurley-test-firebase-adminsdk-fbsvc-6afeb4bd45.json");
+const serviceAccount = require("");
 
 //Initialize Firebase Admin with service account credentials
 //For Firestore no databaseURL is needed
