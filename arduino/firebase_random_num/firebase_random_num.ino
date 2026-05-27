@@ -23,10 +23,10 @@ const char* ssid = "DESKTOP-LPIC61A";
 const char* password = "12345678";
 
 // This is a single, hard-coded URL for the later http request. We might split it into parts.
-const char* firebaseURL = "https://firestore.googleapis.com/v1/projects/smart-hurley-test/databases/(default)/documents/test_data?key=AIzaSyDp1ep5j_90oInc9v2YJf1RKNG2cHG13WE";
-const char* theURL =        "https://firestore.googleapis.com";
-const char* theInstance =   "/v1/projects/smart-hurley-test/databases/(default)/documents/test_data";
-const char* theAPIKey =     "?key=AIzaSyDp1ep5j_90oInc9v2YJf1RKNG2cHG13WE";
+const char* firebaseURL = "";
+const char* theURL =        "https:";
+const char* theInstance =   "";
+const char* theAPIKey =     "";
 // this is not very pretty, but it should; work
 // then we use 'theFullFirebaseURL' instead of 'firebaseURL'
 const char* partial1 = strcat(theURL, theInstance);
